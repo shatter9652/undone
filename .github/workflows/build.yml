@@ -1,0 +1,84 @@
+# .github/workflows/build-ps2-iso.yml
+name: Build Deltarune PS2 ISO
+
+on:
+  workflow_dispatch:
+    inputs:
+      input_url:
+        description: "Direct download URL to deltarune_input.zip"
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Java and tools
+        run: |
+          sudo apt update
+          sudo apt install -y openjdk-21-jdk unzip zip xorriso genisoimage
+
+      - name: Download input zip
+        run: |
+          curl -L "${{ github.event.inputs.input_url }}" -o deltarune_input.zip
+          mkdir -p input
+          unzip -q deltarune_input.zip -d input
+
+      - name: Make processor executable
+        run: |
+          chmod +x ./processor-cli || true
+          chmod +x ./gradlew || true
+
+      - name: Build preprocessor if needed
+        run: |
+          if [ ! -f ./processor-cli ]; then
+            ./gradlew installDist
+            find . -name processor-cli -type f
+          fi
+
+      - name: Locate files
+        id: paths
+        run: |
+          DATAWIN="$(find input -name data.win | head -1)"
+          ROOTDIR="$(dirname "$DATAWIN")"
+
+          ELF="$(find . -name '*.elf' | head -1)"
+          if [ -z "$ELF" ]; then
+            echo "No ELF found. Put butterscotch.elf in repo root."
+            exit 1
+          fi
+
+          CLI="./processor-cli"
+          if [ ! -f "$CLI" ]; then
+            CLI="$(find . -path '*/bin/processor-cli' -type f | head -1)"
+          fi
+
+          echo "rootdir=$ROOTDIR" >> "$GITHUB_OUTPUT"
+          echo "datawin=$DATAWIN" >> "$GITHUB_OUTPUT"
+          echo "elf=$ELF" >> "$GITHUB_OUTPUT"
+          echo "cli=$CLI" >> "$GITHUB_OUTPUT"
+
+      - name: Build ISO
+        run: |
+          ROOT="${{ steps.paths.outputs.rootdir }}"
+          CLI="${{ steps.paths.outputs.cli }}"
+          ELF="${{ steps.paths.outputs.elf }}"
+
+          JAVA_OPTS="-Xms1g -Xmx14g -XX:+UseG1GC" "$CLI" \
+            --target ps2 \
+            --elf "$ELF" \
+            --iso DELTARUNE_PS2.iso \
+            --chapter-dir "$ROOT/chapter1_windows" \
+            --chapter-dir "$ROOT/chapter2_windows" \
+            --chapter-dir "$ROOT/chapter3_windows" \
+            --chapter-dir "$ROOT/chapter4_windows" \
+            --include-raw "$ROOT/mus" \
+            "$ROOT/data.win"
+
+      - name: Upload ISO
+        uses: actions/upload-artifact@v4
+        with:
+          name: DELTARUNE_PS2_ISO
+          path: DELTARUNE_PS2.iso
