@@ -1,0 +1,12 @@
+abi_version=2.3.0
+builtins_platform=JS
+compiler_version=2.3.10
+depends=kotlin ButterscotchPreprocessor\:processor-common net.perfectdreams.compose.htmldreams\:html-core org.jetbrains.kotlinx\:kotlinx-serialization-json net.perfectdreams.luna\:modal-common net.perfectdreams.luna\:modal-manager-frontend org.jetbrains.compose.runtime\:runtime net.perfectdreams.compose.htmldreams\:internal-html-core-runtime org.jetbrains.kotlinx\:kotlinx-serialization-core androidx.compose.runtime\:runtime-annotation androidx.compose.runtime\:runtime org.jetbrains.kotlinx\:kotlinx-coroutines-core org.jetbrains.kotlin\:kotlin-dom-api-compat org.jetbrains.kotlin-wrappers\:kotlin-browser org.jetbrains.kotlin-wrappers\:kotlin-cssom-core org.jetbrains.kotlin-wrappers\:kotlin-web org.jetbrains.kotlin-wrappers\:kotlin-js org.jetbrains.kotlin-wrappers\:kotlin-js-core org.jetbrains.kotlinx\:atomicfu
+ir_signature_versions=1,2
+jsOutputName=ButterscotchPreprocessor-processor-web
+language_features=+AllowAnyAsAnActualTypeForExpectInterface +MultiPlatformProjects
+metadata_version=2.3.0
+serializedIrFileFingerprints=1qg5zyfeopiqr.68m3rlpoiclv ue94d5zinv9g.84sqjoi5c53b 1hzrq09a1qj3i.7e9xe8fyrcrj 349b7ccqzb87y.1fktwtewutazk xx1ek6pwsvux.3dv1yc90recrx 1s5t0gybsm60j.2sjii4remwbm1 227kv3htr8c4w.13yg0z4x3a8j6 1945fuv620wr3.3cpga8zue3ead 1ai1ocmal7duo.qynz7l64p921 2w1447ycebhp7.g1570u1e8tlp 340dkebvo99av.3esb0lfcti5c9 18js493o9y851.93x8n4ieh45w 2xh5s2hojprbr.2kyrx2tv112qn mf45s8ued4e1.3ah3a8ru2zktt 1auaq8ay32b6u.2e3mmhfu1u8h3 1uzb9lqhdxdba.3ugi9eic8jtpe lq3vj62isd0g.37lmjpp41l0jn 2okvd4hur7b55.hvusi9dhx6b8 15juj7s9tz4k1.2s53binjinwun 3spg5gbq9eyo5.1d54g5xbgekut 12r8yjrtgdejd.4kpayx6aaelc m4516wywvmgk.278wulw0e56jp 292jb96jntvoc.3f93f2g79c54t
+serializedKlibFingerprint=1cuq1o4jq2g0b.1hzwfw1j5e8iz
+unique_name=ButterscotchPreprocessor\:processor-web
+wasm_targets=wasm-js

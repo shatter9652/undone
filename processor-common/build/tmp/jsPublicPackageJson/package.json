@@ -1,0 +1,10 @@
+{
+  "name": "ButterscotchPreprocessor-processor-common",
+  "version": "0.0.0-unspecified",
+  "main": "ButterscotchPreprocessor-processor-common.js",
+  "devDependencies": {},
+  "dependencies": {},
+  "peerDependencies": {},
+  "optionalDependencies": {},
+  "bundledDependencies": []
+}

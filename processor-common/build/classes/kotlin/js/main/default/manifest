@@ -1,0 +1,12 @@
+abi_version=2.3.0
+builtins_platform=JS
+compiler_version=2.3.10
+depends=kotlin org.jetbrains.kotlinx\:kotlinx-coroutines-core org.jetbrains.kotlin\:kotlin-dom-api-compat org.jetbrains.kotlin-wrappers\:kotlin-browser org.jetbrains.kotlin-wrappers\:kotlin-cssom-core org.jetbrains.kotlin-wrappers\:kotlin-web org.jetbrains.kotlin-wrappers\:kotlin-js org.jetbrains.kotlin-wrappers\:kotlin-js-core org.jetbrains.kotlinx\:atomicfu
+ir_signature_versions=1,2
+jsOutputName=ButterscotchPreprocessor-processor-common
+language_features=+AllowAnyAsAnActualTypeForExpectInterface +MultiPlatformProjects
+metadata_version=2.3.0
+serializedIrFileFingerprints=2la0szetvuiut.ado1pisszu3z 1edlmnuoyy100.35ptq1dph60m9 31ahc7u8mm7t0.r5ugm5vjgszi 3d5mkystboqzb.8qky1l1z8c2k 1vqzc8t40ooqh.hlx03jpjvhia 3dphs2cpnvdn.muwxkblt4u8z 1b6tsavhij6.147imoxvrbv7d nzstzyp4h0pn.39x292drrnte8 1sdcgu6qmqnc2.ktrxauenr41w 1wd9picgi86rd.hzacw77g4rh 1kkq09il57g5q.1hbcdafc81yy0 slb38qgnhy02.1pqkflgwidvr7 ovs1xovzdi7u.pkcu6huu20oa 3p5jzh1y1m05e.76600ihk3zer 269omyh66yxdd.r24v98tkhl5n s5npwgtd8f6l.17buad1fjsuva
+serializedKlibFingerprint=3pgj7o54i8ccz.6ollzjsvd7qd
+unique_name=ButterscotchPreprocessor\:processor-common
+wasm_targets=wasm-js
