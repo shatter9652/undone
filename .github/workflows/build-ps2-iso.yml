@@ -1,0 +1,68 @@
+name: Build Deltarune PS2 ISO
+
+on:
+  workflow_dispatch:
+    inputs:
+      input_url:
+        description: "Direct URL to Deltarune zip"
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Install tools
+        run: |
+          sudo apt update
+          sudo apt install -y unzip zip curl
+
+      - name: Download and extract Deltarune zip
+        run: |
+          curl -L "${{ github.event.inputs.input_url }}" -o deltarune_input.zip
+          mkdir -p input
+          unzip -q deltarune_input.zip -d input
+          find input -maxdepth 3 -type f | head -100
+
+      - name: Build PS2 ISO
+        run: |
+          java -version
+
+          ROOT="input/Deltarune"
+          CLI="./processor-clibuild/bin/processor-cli"
+          ELF="./webdist/butterscotch-bc17.elf"
+
+          chmod +x "$CLI"
+
+          ls -lah "$ROOT"
+          ls -lah "$ROOT/chapter1_windows"
+          ls -lah "$ROOT/chapter2_windows"
+          ls -lah "$ROOT/chapter3_windows"
+          ls -lah "$ROOT/chapter4_windows"
+          ls -lah "$CLI"
+          ls -lah "$ELF"
+
+          JAVA_OPTS="-Xms1g -Xmx14g -XX:+UseG1GC" "$CLI" \
+            --target ps2 \
+            --elf "$ELF" \
+            --iso DELTARUNE_PS2.iso \
+            --chapter-dir "$ROOT/chapter1_windows" \
+            --chapter-dir "$ROOT/chapter2_windows" \
+            --chapter-dir "$ROOT/chapter3_windows" \
+            --chapter-dir "$ROOT/chapter4_windows" \
+            --include-raw "$ROOT/mus" \
+            "$ROOT/data.win"
+
+      - name: Upload ISO
+        uses: actions/upload-artifact@v4
+        with:
+          name: DELTARUNE_PS2_ISO
+          path: DELTARUNE_PS2.iso
